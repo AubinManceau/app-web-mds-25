@@ -9,9 +9,9 @@ import { UserIcon, ShoppingCartIcon } from '@heroicons/vue/24/solid'
       <h1 class="text-4xl font-extralight uppercase">Calmar</h1>
     </div>
     <nav class="flex space-x-12">
-      <RouterLink to="/" className="font-medium">Accueil</RouterLink>
-      <RouterLink to="/products" className="font-medium">Nos vêtements</RouterLink>
-      <RouterLink to="/contact" className="font-medium">Nous contacter</RouterLink>
+      <RouterLink to="/" class="font-medium">Accueil</RouterLink>
+      <RouterLink to="/products" class="font-medium">Nos vêtements</RouterLink>
+      <RouterLink to="/contact" class="font-medium">Nous contacter</RouterLink>
     </nav>
     <div class="flex items-center space-x-6">
       <RouterLink to="/"><UserIcon class="size-6 text-black"/></RouterLink>

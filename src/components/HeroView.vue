@@ -9,8 +9,8 @@ import LinkButton from '@/components/LinkButton.vue';
             <h3 class="text-7xl uppercase font-extralight mt-1">été 2025</h3>
             <p class="text-sm font-light mt-4">Jusqu'à -50% sur la nouvelle collection*</p>
             <div class="flex gap-2 mt-8">
-                <LinkButton title="Nos vêtements" type="full"/>
-                <LinkButton title="Nous contacter" type="half"/>
+                <LinkButton title="Nos vêtements" type="full" to="/products"/>
+                <LinkButton title="Nous contacter" type="empty" to="/contact"/>
             </div>
         </div>
         <div class="h-128 flex items-center justify-center">
