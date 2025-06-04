@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
 import { getAllCourses } from '@/services/products';
+import HeroView from '@/components/HeroView.vue';
 
 const products = ref([]);
 
@@ -15,12 +16,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <main>
-    test
-    <ul>
-      <li v-for="(product, index) in products" :key="index">
-        {{ product.title }}
-      </li>
-    </ul>
+  <main class="mb-32">
+    <HeroView />
   </main>
 </template>
