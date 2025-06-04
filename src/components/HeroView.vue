@@ -1,5 +1,4 @@
 <script setup>
-import LinkButton from '@/components/LinkButton.vue'
 </script>
 
 <template>
@@ -8,10 +7,8 @@ import LinkButton from '@/components/LinkButton.vue'
       <h2 class="text-3xl lg:text-5xl uppercase font-bold">Nouvelle collection</h2>
       <h3 class="text-4xl lg:text-7xl uppercase font-extralight mt-1">été 2025</h3>
       <p class="text-sm font-light mt-4">Jusqu'à -50% sur la nouvelle collection*</p>
-      <div class="flex flex-col sm:flex-row gap-4 mt-8 justify-center items-center lg:justify-start">
-        <LinkButton title="Nos vêtements" type="full" to="/products" />
-        <LinkButton title="Nous contacter" type="empty" to="/contact" />
-      </div>
+      <slot name="buttons">
+      </slot>
     </div>
 
     <div class="flex items-center justify-center lg:h-full">
