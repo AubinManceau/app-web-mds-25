@@ -1,6 +1,6 @@
 import { fetchData } from "./api";
 
-export async function getAllCourses() {
+export async function getProducts() {
     try {
         const data = await fetchData(`/products`, {
             method: "GET",
