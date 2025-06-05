@@ -1,8 +1,15 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-import { UserIcon, ShoppingCartIcon } from '@heroicons/vue/24/solid'
+import { UserIcon, ShoppingCartIcon, UserMinusIcon  } from '@heroicons/vue/24/solid'
 import { ref } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+
 const isMenuOpen = ref(false)
+const auth = useAuthStore()
+
+const logout = () => {
+  auth.logout()
+}
 </script>
 
 <template>
@@ -25,7 +32,8 @@ const isMenuOpen = ref(false)
         <RouterLink to="/contact" class="font-medium">Nous contacter</RouterLink>
       </nav>
       <div class="flex items-center space-x-6">
-        <RouterLink to="/"><UserIcon class="size-6 text-black" /></RouterLink>
+        <button @click="logout" v-if="auth.isAuthenticated"><UserMinusIcon class="size-6 text-black cursor-pointer" /></button>
+        <RouterLink v-else to="/login"><UserIcon class="size-6 text-black" /></RouterLink>
         <RouterLink to="/"><ShoppingCartIcon class="size-6 text-black" /></RouterLink>
       </div>
     </div>
@@ -36,7 +44,8 @@ const isMenuOpen = ref(false)
         <RouterLink to="/products" class="font-medium" @click="isMenuOpen = false">Nos vêtements</RouterLink>
         <RouterLink to="/contact" class="font-medium" @click="isMenuOpen = false">Nous contacter</RouterLink>
         <div class="flex space-x-6 mt-2">
-          <RouterLink to="/"><UserIcon class="size-6 text-black" /></RouterLink>
+          <button @click="logout" v-if="auth.isAuthenticated"><UserMinusIcon class="size-6 text-black cursor-pointer" /></button>
+          <RouterLink v-else to="/login"><UserIcon class="size-6 text-black" /></RouterLink>
           <RouterLink to="/"><ShoppingCartIcon class="size-6 text-black" /></RouterLink>
         </div>
       </nav>

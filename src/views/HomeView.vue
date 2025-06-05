@@ -43,6 +43,10 @@ onBeforeMount(async () => {
     </ProductsView>
 
     <InfoView />
-    <BestSellerView :products="products.reverse().slice(0,6)" />
+    <BestSellerView :products="products.reverse().slice(0,6)">
+      <template #title>
+        <TitleView light="Nos" bold="meilleurs ventes" />
+      </template>
+    </BestSellerView>
   </main>
 </template>
