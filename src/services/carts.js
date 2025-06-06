@@ -24,11 +24,6 @@ export async function createCart({ userId, products, date }) {
 }
 
 export async function updateCart({ id, userId, products, date }) {
-    console.log('PUT /carts/' + id, {
-        userId,
-        products,
-        date
-    });
     try {
         const data = await fetchData(`/carts/${id}`, {
             method: "PUT",

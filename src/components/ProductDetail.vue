@@ -17,6 +17,9 @@ const props = defineProps({
 const addToCart = async () => {
     try {
         const userId = Number(auth.id);
+        while (!userId) {
+            await new Promise(resolve => setTimeout(resolve, 50));
+        }
         const date = new Date().toISOString();
         const productToAdd = { 
             productId: props.product.id,

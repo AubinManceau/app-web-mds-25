@@ -35,7 +35,7 @@ const logout = () => {
       <div class="flex items-center space-x-6">
         <ActionButton title="Déconnexion" :action="logout" v-if="auth.isAuthenticated"/>
         <RouterLink v-else to="/login"><UserIcon class="size-6 text-black" /></RouterLink>
-        <RouterLink v-if="auth.isAuthenticated" to="/"><ShoppingCartIcon class="size-6 text-black" /></RouterLink>
+        <RouterLink v-if="auth.isAuthenticated" to="/cart"><ShoppingCartIcon class="size-6 text-black" /></RouterLink>
       </div>
     </div>
 
@@ -47,7 +47,7 @@ const logout = () => {
         <div class="flex space-x-6 mt-2">
           <ActionButton title="Déconnexion" :action="logout" v-if="auth.isAuthenticated"/>
           <RouterLink v-else to="/login"><UserIcon class="size-6 text-black" /></RouterLink>
-          <RouterLink v-if="auth.isAuthenticated" to="/"><ShoppingCartIcon class="size-6 text-black" /></RouterLink>
+          <RouterLink v-if="auth.isAuthenticated" to="/cart"><ShoppingCartIcon class="size-6 text-black" /></RouterLink>
         </div>
       </nav>
     </div>
