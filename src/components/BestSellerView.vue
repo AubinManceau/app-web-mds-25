@@ -1,5 +1,4 @@
 <script setup>
-import TitleView from '@/components/TitleView.vue';
 import Carousel from 'primevue/carousel';
 import ProductCard from '@/components/ProductCard.vue';
 
@@ -31,7 +30,9 @@ const responsiveOptions = [
 
 <template>
   <div class="px-6 md:px-16 lg:px-32 py-16">
-    <TitleView light="Nos" bold="meilleurs ventes" />
+    <slot name="title">
+
+    </slot>
     <Carousel
       :value="products"
       :numVisible="4"
