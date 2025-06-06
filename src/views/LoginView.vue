@@ -39,11 +39,11 @@ const handleLogin = async () => {
       username: loginForm.value.username,
       password: loginForm.value.password
     })
-    if (!data || !data.token) {
+    if (!data || !data.id) {
       serverError.value = 'Identifiants invalides, veuillez réessayer.'
       return
     }
-    auth.login(data.token)
+    auth.login(data.id)
     router.push('/')
   } catch (error) {
     serverError.value = error.message

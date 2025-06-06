@@ -3,22 +3,22 @@ import { ref } from 'vue'
 import { computed } from 'vue'
 
 export const useAuthStore = defineStore('auth', () => {
-  const token = ref(localStorage.getItem('token') || null)
+  const id = ref(localStorage.getItem('id') || null)
 
-  const isAuthenticated = computed(() => !!token.value)
+  const isAuthenticated = computed(() => !!id.value)
 
-  const login = (newToken) => {
-    token.value = newToken
-    localStorage.setItem('token', newToken)
+  const login = (newId) => {
+    id.value = newId
+    localStorage.setItem('id', newId)
   }
 
   const logout = () => {
-    token.value = null
-    localStorage.removeItem('token')
+    id.value = null
+    localStorage.removeItem('id')
   }
 
   return {
-    token,
+    id,
     isAuthenticated,
     login,
     logout,

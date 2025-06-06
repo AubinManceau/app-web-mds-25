@@ -1,8 +1,9 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-import { UserIcon, ShoppingCartIcon, UserMinusIcon  } from '@heroicons/vue/24/solid'
+import { UserIcon, ShoppingCartIcon } from '@heroicons/vue/24/solid'
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
+import ActionButton from './ActionButton.vue'
 
 const isMenuOpen = ref(false)
 const auth = useAuthStore()
@@ -32,9 +33,9 @@ const logout = () => {
         <RouterLink to="/contact" class="font-medium">Nous contacter</RouterLink>
       </nav>
       <div class="flex items-center space-x-6">
-        <button @click="logout" v-if="auth.isAuthenticated"><UserMinusIcon class="size-6 text-black cursor-pointer" /></button>
+        <ActionButton title="Déconnexion" :action="logout" v-if="auth.isAuthenticated"/>
         <RouterLink v-else to="/login"><UserIcon class="size-6 text-black" /></RouterLink>
-        <RouterLink to="/"><ShoppingCartIcon class="size-6 text-black" /></RouterLink>
+        <RouterLink v-if="auth.isAuthenticated" to="/"><ShoppingCartIcon class="size-6 text-black" /></RouterLink>
       </div>
     </div>
 
@@ -44,9 +45,9 @@ const logout = () => {
         <RouterLink to="/products" class="font-medium" @click="isMenuOpen = false">Nos vêtements</RouterLink>
         <RouterLink to="/contact" class="font-medium" @click="isMenuOpen = false">Nous contacter</RouterLink>
         <div class="flex space-x-6 mt-2">
-          <button @click="logout" v-if="auth.isAuthenticated"><UserMinusIcon class="size-6 text-black cursor-pointer" /></button>
+          <ActionButton title="Déconnexion" :action="logout" v-if="auth.isAuthenticated"/>
           <RouterLink v-else to="/login"><UserIcon class="size-6 text-black" /></RouterLink>
-          <RouterLink to="/"><ShoppingCartIcon class="size-6 text-black" /></RouterLink>
+          <RouterLink v-if="auth.isAuthenticated" to="/"><ShoppingCartIcon class="size-6 text-black" /></RouterLink>
         </div>
       </nav>
     </div>

@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { register } from '@/services/auth'
 import { useRouter } from 'vue-router'
+import { createCart } from '@/services/carts'
 
 const router = useRouter()
 
@@ -49,14 +50,32 @@ const handleRegister = async () => {
         email: registerForm.value.email,
         password: registerForm.value.password
       })
+      
       if (!data) {
-        serverError.value = 'Erreur, veuillez réessayer.'
+        serverError.value = 'Erreur lors de l\'inscription, veuillez réessayer.'
         return
       }
-      router.push('/login')
+      
+      try {
+        const cart = await createCart({
+          userId: data.id,
+          products: [],
+          date: new Date().toISOString()
+        })
+        
+        if (!cart) {
+          serverError.value = 'Erreur lors de la création du panier.'
+          return
+        }
+        
+        router.push('/login')
+      } catch (error) {
+        serverError.value = error.message || 'Erreur lors de la création du panier.'
+        console.error('Erreur lors de la création du panier :', error)
+      }
     } catch (error) {
-      serverError.value = error.message
-      console.error('Erreur lors de la connexion :', error)
+      serverError.value = error.message || 'Erreur lors de l\'inscription.'
+      console.error('Erreur lors de l\'inscription :', error)
     }
   }
 }

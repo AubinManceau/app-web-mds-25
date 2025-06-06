@@ -1,11 +1,55 @@
 <script setup>
-import ActionButton from './ActionButton.vue';
-defineProps({
+import ActionButton from './ActionButton.vue'
+import { useAuthStore } from '@/stores/auth'
+import LinkButton from './LinkButton.vue'
+import { updateCart, getCarts } from '@/services/carts'
+import router from '@/router'
+import { ref } from 'vue'
+const auth = useAuthStore()
+const quantity = ref(1)
+const props = defineProps({
     product: {
         type: Object,
         required: true,
     }
 })
+
+const addToCart = async () => {
+    try {
+        const userId = Number(auth.id);
+        const date = new Date().toISOString();
+        const productToAdd = { 
+            productId: props.product.id,
+            quantity: quantity.value,
+        };
+
+        const carts = await getCarts();
+        const userCart = carts.find(cart => cart.userId === userId);
+
+        if (!userCart) {
+            console.error("Aucun panier trouvé pour cet utilisateur");
+            return;
+        }
+
+        const id = userCart.id;
+        const updatedProducts = [...userCart.products];
+        const existingProductIndex = updatedProducts.findIndex(p => p.productId === productToAdd.productId);
+
+        if (existingProductIndex !== -1) {
+            updatedProducts[existingProductIndex].quantity += productToAdd.quantity;
+        } else {
+            updatedProducts.push(productToAdd);
+        }
+
+        const response = await updateCart({ id, userId, products: updatedProducts, date });
+
+        if (response) {
+            router.push('/cart');
+        }
+    } catch (error) {
+        console.error("Erreur lors de l'ajout au panier :", error);
+    }
+};
 </script>
 
 <template>
@@ -21,7 +65,19 @@ defineProps({
             <p class="text-2xl font-bold">{{ product.price }} €</p>
         </div>
         <div class="flex items-center mt-8">
-            <ActionButton title="Ajouter au panier" />
+            <div v-if="auth.isAuthenticated" class="flex items-center gap-2">
+                <input 
+                    id="quantity" 
+                    type="number"
+                    v-model.number="quantity" 
+                    value="1"
+                    min="1"
+                    max="50" 
+                    class="w-14 px-2 py-1 border rounded" 
+                />
+                <ActionButton title="Ajouter au panier" :action="addToCart" />
+            </div>
+            <LinkButton v-else to="/login" title="Ajouter au panier" />
         </div>
     </div>
   </div>
