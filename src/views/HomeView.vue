@@ -31,7 +31,7 @@ onBeforeMount(async () => {
       </template>
     </HeroView>
 
-    <ProductsView :products="products.reverse().slice(0,8)">
+    <ProductsView :products="[...products].reverse().slice(0,8)">
       <template #title>
         <TitleView light="Nos" bold="produits" />
       </template>
@@ -43,7 +43,7 @@ onBeforeMount(async () => {
     </ProductsView>
 
     <InfoView />
-    <BestSellerView :products="products.reverse().slice(0,6)">
+    <BestSellerView :products="[...products].reverse().slice(0,6)">
       <template #title>
         <TitleView light="Nos" bold="meilleurs ventes" />
       </template>
