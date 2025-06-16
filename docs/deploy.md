@@ -1,16 +1,16 @@
-# 🚀 Déploiement de l'application Vue.js sur un VPS avec GitHub Actions
+# 🚀 Déploiement sur un VPS avec GitHub Actions
 
-Ce projet utilise GitHub Actions pour automatiser le déploiement de l'application Vue.js sur un serveur VPS à chaque mise à jour de la branche master.
+Ce projet utilise GitHub Actions pour automatiser le déploiement de l'application sur un serveur VPS à chaque mise à jour de la branche master.
 
 ## 🔧 Configuration préalable
 
-Avant d'utiliser ce workflow, configure les secrets suivants dans ton dépôt GitHub :
+Avant d'utiliser ce workflow, il faut générer les clés SSH sur le serveur VPS et configurer les secrets suivants dans le dépôt GitHub :
 
 | Secret GitHub | Description |
 |---------------|-------------|
 | `VPS_SSH_KEY` | Clé SSH privée permettant à GitHub de se connecter au VPS |
 | `VPS_HOST` | Adresse IP ou nom de domaine du VPS |
-| `VPS_USER` | Utilisateur SSH sur le VPS (ex. root, ubuntu) |
+| `VPS_USER` | Utilisateur SSH sur le VPS |
 
 > **📌 Important :** La clé publique SSH correspondante doit être ajoutée dans `~/.ssh/authorized_keys` du VPS.
 
@@ -69,8 +69,6 @@ Clone le dépôt dans l'environnement d'exécution GitHub Actions.
 - Met à jour le code (`git pull`)
 - Redémarre les conteneurs Docker avec reconstruction (`--build`)
 
-> **📦 Prérequis :** Le projet sur le VPS doit contenir un `docker-compose.yml` fonctionnel dans le dossier `/var/www/fake-store-app`.
-
 ## ✅ Résultat
 
-Chaque modification de la branche `master` déclenche automatiquement un déploiement de l'application sur ton VPS via Docker, sans intervention manuelle.
+Chaque modification de la branche `master` déclenche automatiquement un déploiement de l'application sur le VPS, sans intervention manuelle. Le détail de ces actions peuvent être retrouvés dans l'onglet Actions de GitHub.
